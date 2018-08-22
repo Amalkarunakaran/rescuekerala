@@ -121,6 +121,7 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
+	    
         "KEY_PREFIX": "keralarescue"
     }
 }
@@ -214,7 +215,7 @@ if os.environ.get('USE_S3'):
     DEFAULT_FILE_STORAGE="storages.backends.s3boto3.S3Boto3Storage"
 else:
     MEDIA_URL = '/media/'
-ADMIN_SITE_HEADER = "Keralarescue Dashboard"
+ADMIN_SITE_HEADER = "Kerala Rescue Dashboard"
 MEDIA_ROOT = 'media'
 
 #JWT REST Auth for API
