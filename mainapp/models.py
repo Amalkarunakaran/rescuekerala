@@ -471,7 +471,7 @@ class Person(models.Model):
                 }.get(self.district, 'Unknown')
 
     def generate_unique_identifier(self):
-        identifier_str = str(self.phone) + str(self.name) + str(self.age)
+        identifier_str = str(self.camped_at) + str(self.phone) + str(self.name) + str(self.age)
         return md5(identifier_str.encode('utf-8')).hexdigest()
 
     class Meta:
