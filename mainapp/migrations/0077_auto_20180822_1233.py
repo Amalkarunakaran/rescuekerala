@@ -3,12 +3,6 @@
 from django.db import migrations
 from mainapp.models import Person
 
-def generate_unique_identifier(apps, schema_editor):
-    for row in Person.objects.all():
-        row.unique_identifier = row.generate_unique_identifier()
-        row.save(update_fields=['unique_identifier'])
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -16,5 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(generate_unique_identifier, reverse_code=migrations.RunPython.noop),
+        migrations.RunSQL("CREATE UNIQUE INDEX unique_identifier_idx ON mainapp_person (unique_identifier) WHERE (unique_identifier is not null);")
     ]

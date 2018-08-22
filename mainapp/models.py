@@ -443,6 +443,14 @@ class Person(models.Model):
 
     unique_identifier = models.CharField(max_length=32, default='')
 
+    def generate_unique_identifier(self):
+        identifier_str = str(self.phone) + str(self.name) + str(self.age)
+        return md5(identifier_str.encode('utf-8')).hexdigest()
+
+    def save(self):
+        self.unique_identifier = self.generate_unique_identifier()
+        super(Person, self).save()
+
     @property
     def sex(self):
         return {
@@ -469,10 +477,6 @@ class Person(models.Model):
                 'tcr':'Thrissur - തൃശ്ശൂർ',
                 'wnd':'Wayanad - വയനാട്',
                 }.get(self.district, 'Unknown')
-
-    def generate_unique_identifier(self):
-        identifier_str = str(self.camped_at) + str(self.phone) + str(self.name) + str(self.age)
-        return md5(identifier_str.encode('utf-8')).hexdigest()
 
     class Meta:
         verbose_name = 'Relief: Inmate'

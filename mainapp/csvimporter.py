@@ -35,7 +35,7 @@ def import_inmate_file(csvid):
         try:
             camp_id = int(datum.get("camped_at", ""))
             camp_obj = RescueCamp.objects.get(id = camp_id)
-            identifier_str = datum.get("camped_at", "") + (datum.get("phone", "") + datum.get("name","") + datum.get("age",0)).encode('utf-8')
+            identifier_str = (datum.get("phone", "") + datum.get("name","") + datum.get("age",0)).encode('utf-8')
             identifier = md5(identifier_str).hexdigest()
             #this will fail. we should deal with the removed unique_identifier
             p = Person.objects.get(unique_identifier=identifier)
