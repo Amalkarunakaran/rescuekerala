@@ -9,6 +9,7 @@ from django.urls import reverse
 import csv
 import codecs
 from django.core.exceptions import ValidationError
+from hashlib import md5
 
 
 
@@ -468,6 +469,10 @@ class Person(models.Model):
                 'tcr':'Thrissur - തൃശ്ശൂർ',
                 'wnd':'Wayanad - വയനാട്',
                 }.get(self.district, 'Unknown')
+
+    def generate_unique_identifier(self):
+        identifier_str = str(self.phone) + str(self.name) + str(self.age)
+        return md5(identifier_str.encode('utf-8')).hexdigest()
 
     class Meta:
         verbose_name = 'Relief: Inmate'

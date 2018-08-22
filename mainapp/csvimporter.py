@@ -4,9 +4,6 @@ from redis import Redis
 import csv
 import codecs
 
-
-
-
 def parsedate(str):
     try:
         if( len(str) > 1 ):
